@@ -1,8 +1,14 @@
-const { getAllUsersDB, creatUsersDB } = require('../repository/user.repository');
+const { getAllUsersDB, creatUsersDB, getByIDDB } = require('../repository/user.repository');
 
 async function getAllUsers() {
     const data = await getAllUsersDB();
     if (!data.length) throw new Error('db is empty')
+    return data
+}
+
+async function getByID(id) {
+    const data = await getByIDDB(id);
+    if (!data.length) throw new Error('id is not found')
     return data
 }
 
@@ -14,5 +20,5 @@ async function creatUsers(birth, city, age, name, surname) {
 }
 
 module.exports = {
-    getAllUsers, creatUsers
+    getAllUsers, creatUsers, getByID
 }
